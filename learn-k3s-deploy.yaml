@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    learn-k3s: deploy
+  name: learn-k3s-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      learn-k3s: deploy
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        learn-k3s: deploy
+    spec:
+      containers:
+        - envFrom:
+            - configMapRef: 
+                name: learn-k3s-cm
+                optional: false
+          image: localhost:5000/learn-k3s-app:latest
+          name: learn-k3s-ctr
+          ports:
+          - containerPort: 80
+            name: http

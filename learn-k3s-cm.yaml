@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    learn-k3s: cm
+  name: learn-k3s-cm
+data:
+  DOMAIN: "berde.bar"
